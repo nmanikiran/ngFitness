@@ -1,0 +1,20 @@
+<section class="singup-form">
+  <form fxLayout="column" fxLayoutAlign="center center" #f="ngForm" (submit)="singup(f)" fxLayoutGap="5px">
+    <mat-form-field>
+      <input #emailInput="ngModel" matInput placeholder="Your Email" type="email" name="eamil" ngModel required email>
+      <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">E-mail is invalid</mat-error>
+    </mat-form-field>
+    <mat-form-field hintLabel="Should be at least 6 charaters long">
+      <input #pwInput="ngModel" matInput placeholder="Enter Password" type="password" name="password" ngModel required minlength="6">
+      <mat-hint align="end">{{ pwInput.value?.length}} / 6</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput ngModel [matDatepicker]="picker" placeholder="Your Birthday" name="birthday" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-checkbox color="primary">Agree the terms and conditions</mat-checkbox>
+    <button type="submit" color="primary" mat-raised-button>Signup</button>
+  </form>
+</section>

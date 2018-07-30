@@ -1,0 +1,17 @@
+<section class="singin-form">
+
+  <form fxLayout="column" fxLayoutAlign="center center" (submit)="singin()" fxLayoutGap="5px" [formGroup]="loginForm">
+    <mat-form-field>
+      <input matInput placeholder="Your Email" type="email" name="email" formControlName="email">
+      <mat-hint>Please enter a valid email.</mat-hint>
+      <mat-error>Invalid or missing email.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Enter Password" type="password" name="password" formControlName="password">
+      <mat-hint>Please enter your password.</mat-hint>
+      <mat-error>Missing password.</mat-error>
+    </mat-form-field>
+
+    <button type="submit" color="primary" mat-raised-button>Signin</button>
+  </form>
+</section>
