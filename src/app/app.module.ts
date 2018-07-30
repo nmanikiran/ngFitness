@@ -11,14 +11,17 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './../environments/environment';
 const routes: Routes = [
   { path: 'home', component: WelcomeComponent },
   { path: 'auth', loadChildren: '../app/auth/auth.module#AuthModule' },
   {
     path: 'training',
     loadChildren: '../app/training/training.module#TrainingModule',
-    canActivate: [AuthGuard]
+    canLoad: [AuthGuard]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
@@ -36,6 +39,10 @@ const routes: Routes = [
     SharedModule,
     MatSidenavModule,
     MatToolbarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
     RouterModule.forRoot(routes)
   ],
   exports: [MatSidenavModule, MatToolbarModule],

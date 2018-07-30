@@ -10,7 +10,6 @@ import {
   MatTabsModule,
   MatCardModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
   MatSortModule
@@ -26,7 +25,6 @@ const routes: Routes = [{ path: '', component: TrainingComponent }];
     MatTabsModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -42,7 +40,6 @@ const routes: Routes = [{ path: '', component: TrainingComponent }];
     MatTabsModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule

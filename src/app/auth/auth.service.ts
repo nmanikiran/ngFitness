@@ -1,42 +1,61 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import { AuthData } from './models/auth-data.model';
-import { User } from './models/user.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
-  private user: User;
+  private isAuthenticated = false;
   public authChange = new Subject<boolean>();
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private snackBar: MatSnackBar
+  ) {}
 
-  registerUser(auth: AuthData) {
-    this.user = {
-      email: auth.email,
-      userId: Date.now()
-    };
-    this.authChange.next(true);
-    this.router.navigate(['/training']);
+  initAuthListener() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this.router.navigate(['/training']);
+      } else {
+        this.isAuthenticated = false;
+        this.authChange.next(false);
+        this.router.navigate(['/']);
+      }
+    });
+  }
+  registerUser(authData: AuthData) {
+    this.afAuth.auth
+      .createUserAndRetrieveDataWithEmailAndPassword(
+        authData.email,
+        authData.password
+      )
+      .then(result => {
+        // console.log(result);
+      })
+      .catch(error => {
+        this.snackBar.open(error.message, null, { duration: 3000 });
+      });
   }
 
   login(auth: AuthData) {
-    this.user = { email: auth.email, userId: Date.now() };
-    this.authChange.next(true);
-    this.router.navigate(['/training']);
+    this.afAuth.auth
+      .signInAndRetrieveDataWithEmailAndPassword(auth.email, auth.password)
+      .then(result => {})
+      .catch(error => {
+        this.snackBar.open(error.message, null, { duration: 3000 });
+      });
   }
 
   logout() {
-    this.user = null;
-    this.authChange.next(false);
-    this.router.navigate(['/']);
+    this.afAuth.auth.signOut();
   }
 
-  getUser() {
-    return { ...this.user };
-  }
   isAuth() {
-    return this.user != null;
+    return this.isAuthenticated;
   }
 }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -11,12 +10,12 @@ import {
   MatNativeDateModule,
   MatIconModule,
   MatListModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 @NgModule({
   imports: [
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -28,10 +27,10 @@ import {
     MatNativeDateModule,
     MatIconModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   exports: [
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -43,7 +42,8 @@ import {
     MatNativeDateModule,
     MatIconModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   declarations: [],
   providers: []
