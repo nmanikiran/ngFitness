@@ -11,7 +11,9 @@ import {
   MatIconModule,
   MatListModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatMenuModule,
+  MatGridListModule
 } from '@angular/material';
 
 @NgModule({
@@ -28,7 +30,9 @@ import {
     MatIconModule,
     MatListModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   exports: [
     FormsModule,
@@ -43,7 +47,9 @@ import {
     MatIconModule,
     MatListModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
+    MatGridListModule
   ],
   declarations: [],
   providers: []

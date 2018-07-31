@@ -5,6 +5,6 @@
 
   <div fxLayout="row" fxLayoutGap="20px">
     <button mat-raised-button color="warn" (click)="onStop()">Stop</button>
-    <button mat-raised-button color="accent" (click)="onPause()">Pause</button>
+    <button mat-raised-button color="accent" (click)="onPause()">{{isInProgress ? 'Pause' : 'Resume'}}</button>
   </div>
 </section>

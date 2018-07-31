@@ -8,9 +8,14 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'ngFitness';
+  themeName = 'indigo';
   constructor(private auth: AuthService) {}
+
   logout() {}
   ngOnInit() {
     this.auth.initAuthListener();
+  }
+  changeTheme(e) {
+    this.themeName = e;
   }
 }

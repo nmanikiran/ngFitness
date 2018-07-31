@@ -15,10 +15,21 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sidenavToggle = new EventEmitter();
+  @Output() changeColor = new EventEmitter();
   isAuth = false;
   authChangeSubsciption: Subscription;
+
+  colors = [
+    { color: 'purple' },
+    { color: 'orange' },
+    { color: 'lightgreen' },
+    { color: 'pink' }
+  ];
   constructor(private auth: AuthService) {}
 
+  changeTheme(color) {
+    this.changeColor.emit(color);
+  }
   ngOnInit() {
     this.auth.authChange.subscribe(status => {
       this.isAuth = status;

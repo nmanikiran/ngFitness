@@ -10,6 +10,7 @@ import { TrainingService } from '../training.service';
 export class CurrentComponent implements OnInit {
   progress = 0;
   timer;
+  isInProgress = false;
   constructor(
     public snackBar: MatSnackBar,
     private trainingService: TrainingService
@@ -20,6 +21,7 @@ export class CurrentComponent implements OnInit {
   }
 
   startOrResumeTimer() {
+    this.isInProgress = true;
     const step =
       (this.trainingService.getRunningExercise().duration / 100) * 1000;
     this.timer = setInterval(() => {
@@ -36,13 +38,21 @@ export class CurrentComponent implements OnInit {
       this.progress
     } %`;
     if (confirm(message)) {
+      this.isInProgress = false;
       this.trainingService.cancelExercise(this.progress);
     } else {
       this.startOrResumeTimer();
     }
   }
   onPause() {
-    clearInterval(this.timer);
-    this.snackBar.open('Exercise pasued', '', { duration: 1000 });
+    if (this.isInProgress) {
+      this.isInProgress = false;
+      clearInterval(this.timer);
+      this.snackBar.open('Exercise pasued', '', { duration: 1000 });
+    } else {
+      this.isInProgress = true;
+      this.snackBar.open('Exercise resumed', '', { duration: 1000 });
+      this.startOrResumeTimer();
+    }
   }
 }

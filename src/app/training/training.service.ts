@@ -3,6 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Exercise } from './models/exercise.model';
 import { Subject } from 'rxjs';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class TrainingService {
@@ -11,8 +12,13 @@ export class TrainingService {
   private availableExercises: Exercise[] = [];
   private runningExercise: Exercise;
   private exercises: Exercise[] = [];
+  private user: any;
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore, private afAuth: AngularFireAuth) {
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+    });
+  }
 
   fetchAvailableExercises() {
     return this.db
@@ -48,7 +54,8 @@ export class TrainingService {
     this.addDataToDatabase({
       ...this.runningExercise,
       date: new Date(),
-      state: 'completed'
+      state: 'Completed',
+      userId: this.user.uid
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
@@ -60,7 +67,8 @@ export class TrainingService {
       duration: this.runningExercise.duration * (progress / 100),
       calories: this.runningExercise.calories * (progress / 100),
       date: new Date(),
-      state: 'completed'
+      state: 'Cancelled',
+      userId: this.user.uid
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
@@ -72,15 +80,14 @@ export class TrainingService {
 
   fetchCompletedOrCancelled() {
     return this.db
-      .collection('finishedExercises')
+      .collection('finishedExercises', ref =>
+        ref.where('userId', '==', this.user.uid)
+      )
       .snapshotChanges()
       .pipe(
         map(docArray => {
           return docArray.map(doc => {
-            return {
-              id: doc.payload.doc.id,
-              ...doc.payload.doc.data()
-            };
+            return { id: doc.payload.doc.id, ...doc.payload.doc.data() };
           });
         })
       );

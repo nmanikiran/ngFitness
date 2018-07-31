@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div>
-    <button mat-icon-button (click)="onToggleSideNav()" fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSideNav()">
       <mat-icon> menu</mat-icon>
     </button>
     <a routerLink="/">Ng Fitness </a>
@@ -13,13 +13,23 @@
       <li *ngIf="!isAuth">
         <a routerLink="/auth/signup">Singup</a>
       </li>
-      <li *ngIf="isAuth">
-        <a routerLink="/training">Training</a>
-      </li>
-      <li *ngIf="isAuth">
-        <a (click)="logout()">Logout</a>
-      </li>
     </ul>
+
+    <button mat-icon-button *ngIf="isAuth" [matMenuTriggerFor]="colorPicker" role="button">
+      <mat-icon>format_color_fill</mat-icon>
+    </button>
+    <mat-menu #colorPicker="matMenu" role="menu">
+      <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
+        <mat-grid-tile *ngFor="let tile of colors" (click)="changeTheme(tile.color)">
+          <div class="circle" [style.background]="tile.color"></div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-menu>
+
+    <a *ngIf="isAuth" mat-button href="https://github.com/nmanikiran/ngFitness" target="_blank">
+      <img height="26" src="./../../../assets/github-circle-white-transparent.svg" alt="github"> Github
+    </a>
+
 
   </div>
 </mat-toolbar>

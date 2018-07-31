@@ -5,7 +5,17 @@ import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-training',
-  templateUrl: './training.component.html'
+  templateUrl: './training.component.html',
+  styles: [
+    `
+      @media only screen and (min-width: 1000px) {
+        .training-section {
+          width: 80%;
+          margin: 0 auto;
+        }
+      }
+    `
+  ]
 })
 export class TrainingComponent implements OnInit, OnDestroy {
   isOnGoingTraining = false;
