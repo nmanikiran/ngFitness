@@ -1,20 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { RouterModule, Routes } from '@angular/router';
 import { MatSidenavModule, MatToolbarModule } from '@angular/material';
-import { SharedModule } from './shared/shared.module';
-import { HeaderComponent } from './navigation/header/header.component';
-import { SidenavComponent } from './navigation/sidenav/sidenav.component';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth.guard';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { HeaderComponent } from './navigation/header/header.component';
+import { NgModule } from '@angular/core';
+import { SharedModule } from './shared/shared.module';
+import { SidenavComponent } from './navigation/sidenav/sidenav.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { environment } from './../environments/environment';
+
 const routes: Routes = [
   { path: 'home', component: WelcomeComponent },
   { path: 'auth', loadChildren: '../app/auth/auth.module#AuthModule' },
