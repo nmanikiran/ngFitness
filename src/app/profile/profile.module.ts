@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DetailsComponent } from './details/details.component';
 import { RouterModule, Routes } from '@angular/router';
-
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
-import { AuthComponent } from './auth.component';
+import { ProfileComponent } from './profile.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatCardModule } from '@angular/material';
+import { ProfileService } from './profile.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: AuthComponent,
+    component: ProfileComponent,
     children: [
-      { path: 'signin', component: SigninComponent },
-      { path: 'signup', component: SignupComponent }
+      {
+        path: ':id',
+        component: DetailsComponent
+      }
     ]
   }
 ];
@@ -26,8 +27,7 @@ const routes: Routes = [
     MatCardModule,
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule],
-  declarations: [AuthComponent, SigninComponent, SignupComponent],
-  providers: []
+  declarations: [ProfileComponent, DetailsComponent],
+  providers: [ProfileService]
 })
-export class AuthModule {}
+export class ProfileModule {}

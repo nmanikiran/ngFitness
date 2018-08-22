@@ -12,9 +12,9 @@ import {
   MatListModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatMenuModule,
-  MatGridListModule
+  MatMenuModule
 } from '@angular/material';
+import { SharedService } from './shared.service';
 
 @NgModule({
   imports: [
@@ -31,8 +31,7 @@ import {
     MatListModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatMenuModule,
-    MatGridListModule
+    MatMenuModule
   ],
   exports: [
     FormsModule,
@@ -48,10 +47,9 @@ import {
     MatListModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatMenuModule,
-    MatGridListModule
+    MatMenuModule
   ],
   declarations: [],
-  providers: []
+  providers: [SharedService]
 })
 export class SharedModule {}

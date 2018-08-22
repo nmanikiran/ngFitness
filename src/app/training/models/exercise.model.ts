@@ -1,6 +1,6 @@
 export interface Exercise {
   id: string;
-  userId?: string;
+  authId?: string;
   name: string;
   duration: number;
   calories: number;

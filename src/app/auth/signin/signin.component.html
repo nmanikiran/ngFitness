@@ -1,17 +1,29 @@
 <section class="singin-form">
 
-  <form fxLayout="column" fxLayoutAlign="center center" (submit)="singin()" fxLayoutGap="5px" [formGroup]="loginForm">
-    <mat-form-field>
-      <input matInput placeholder="Your Email" type="email" name="email" formControlName="email">
-      <mat-hint>Please enter a valid email.</mat-hint>
-      <mat-error>Invalid or missing email.</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Enter Password" type="password" name="password" formControlName="password">
-      <mat-hint>Please enter your password.</mat-hint>
-      <mat-error>Missing password.</mat-error>
-    </mat-form-field>
-
-    <button type="submit" color="primary" mat-raised-button>Signin</button>
-  </form>
+  <mat-card>
+    <form fxLayout="column" fxLayoutAlign="center center" (submit)="singin()" fxLayoutGap="5px" [formGroup]="loginForm">
+      <mat-form-field>
+        <input matInput placeholder="Your Email" type="email" name="email" formControlName="email" required>
+        <div *ngIf="submitted && fControls['email'].errors" class="invalid-feedback">
+          <mat-error *ngIf="fControls['email'].errors.required">Email is required</mat-error>
+          <mat-error *ngIf="fControls['email'].errors.email">Email must be a valid email address</mat-error>
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Enter Password" type="password" name="password" formControlName="password" required>
+        <div *ngIf="submitted && fControls['password'].errors" class="invalid-feedback">
+          <mat-error *ngIf="fControls['password'].errors.required">Password is required</mat-error>
+          <mat-error *ngIf="fControls['password'].errors.minlength">
+            Password must be at least 6 characters</mat-error>
+        </div>
+      </mat-form-field>
+      <p class="links" fxLayout="row" fxLayoutAlign="space-between">
+        <mat-checkbox formControlName="remember" color="primary">Remember Me</mat-checkbox>
+        <a href="javascript:void(0)" (click)="forogtPassword()">Forgot Password</a>
+      </p>
+      <button type="submit" color="primary" mat-raised-button>Signin</button>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="center center">No account? <a routerLink="/auth/signup">Sign up</a></div>
+    </form>
+  </mat-card>
 </section>

@@ -13,14 +13,16 @@ import { Subscription } from '../../../../node_modules/rxjs';
 @Component({
   selector: 'app-past',
   templateUrl: './past.component.html',
-  styleUrls: ['./past.component.css']
+  styleUrls: ['./past.component.scss']
 })
 export class PastComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns = ['date', 'name', 'duration', 'calories', 'state'];
   dataSource = new MatTableDataSource<Exercise>();
   pastExercisesSubscription: Subscription;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
+  @ViewChild(MatSort)
+  sort: MatSort;
 
   constructor(private trainingService: TrainingService) {}
 

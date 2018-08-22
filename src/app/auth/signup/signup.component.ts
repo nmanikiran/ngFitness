@@ -1,25 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
   maxDate: Date;
-  constructor(private auth: AuthService) {}
+  registerForm: FormGroup;
+  submitted = false;
+  constructor(private formBuilder: FormBuilder, private auth: AuthService) {}
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      isAgreed: [null, Validators.required],
+      birthday: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
     this.maxDate = new Date();
 
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
-  singup(f: NgForm) {
-    this.auth.registerUser({
-      email: f.value.email,
-      password: f.value.password
-    });
+
+  get fControls() {
+    return this.registerForm.controls;
+  }
+
+  singup() {
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    this.auth.registerUser(this.registerForm.value);
   }
 }

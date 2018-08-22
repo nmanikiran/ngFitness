@@ -7,6 +7,8 @@
 
   <a *ngIf="isAuth" mat-list-item routerLink="/training/current" (click)="closeSideNav()">
     <mat-icon>fitness_center</mat-icon>Training</a>
+  <a *ngIf="isAuth && authService.auth" mat-list-item [routerLink]="['/profile', authService.auth?.uid]" (click)="closeSideNav()">
+    <mat-icon>face</mat-icon>Profile</a>
   <a *ngIf="isAuth" mat-list-item (click)="logout()">
     <mat-icon>eject</mat-icon>Logout</a>
 

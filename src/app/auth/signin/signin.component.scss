@@ -1,0 +1,19 @@
+mat-form-field {
+  width: 300px;
+}
+.singin-form {
+  padding: 30px;
+  width: 400px;
+  margin: 0 auto;
+  max-width: 100%;
+  p {
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    font-size: 0.8em;
+  }
+  .mat-checkbox-inner-container {
+    width: 15px;
+    height: 15px;
+  }
+}

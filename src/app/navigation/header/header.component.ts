@@ -7,24 +7,22 @@ import {
 } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Output() sidenavToggle = new EventEmitter();
-  @Output() changeColor = new EventEmitter();
+  @Output()
+  sidenavToggle = new EventEmitter();
+  @Output()
+  changeColor = new EventEmitter();
   isAuth = false;
   authChangeSubsciption: Subscription;
 
-  colors = [
-    { color: 'purple' },
-    { color: 'orange' },
-    { color: 'lightgreen' },
-    { color: 'pink' }
-  ];
+  colors = [{ color: 'purple' }, { color: 'pink' }];
   constructor(private auth: AuthService) {}
 
   changeTheme(color) {

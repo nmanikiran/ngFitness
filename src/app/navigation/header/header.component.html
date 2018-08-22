@@ -19,11 +19,9 @@
       <mat-icon>format_color_fill</mat-icon>
     </button>
     <mat-menu #colorPicker="matMenu" role="menu">
-      <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
-        <mat-grid-tile *ngFor="let tile of colors" (click)="changeTheme(tile.color)">
-          <div class="circle" [style.background]="tile.color"></div>
-        </mat-grid-tile>
-      </mat-grid-list>
+      <div class="color" *ngFor="let tile of colors" (click)="changeTheme(tile.color)">
+        <div class="circle" [style.background]="tile.color"></div>
+      </div>
     </mat-menu>
 
     <a *ngIf="isAuth" mat-button href="https://github.com/nmanikiran/ngFitness" target="_blank">

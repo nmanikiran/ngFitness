@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
-import { Exercise } from './models/exercise.model';
-import { Subject } from 'rxjs';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Exercise } from './models/exercise.model';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class TrainingService {
@@ -11,12 +11,11 @@ export class TrainingService {
   exercisesChanged = new Subject<Exercise[]>();
   private availableExercises: Exercise[] = [];
   private runningExercise: Exercise;
-  private exercises: Exercise[] = [];
-  private user: any;
+  private auth: any;
 
   constructor(private db: AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
-      this.user = user;
+      this.auth = user;
     });
   }
 
@@ -55,20 +54,23 @@ export class TrainingService {
       ...this.runningExercise,
       date: new Date(),
       state: 'Completed',
-      userId: this.user.uid
+      authId: this.auth.uid
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
   }
 
   cancelExercise(progress: number) {
+    let { duration, calories } = this.runningExercise;
+    duration = parseFloat((duration * (progress / 100)).toFixed(3));
+    calories = parseFloat((calories * (progress / 100)).toFixed(3));
     this.addDataToDatabase({
       ...this.runningExercise,
-      duration: this.runningExercise.duration * (progress / 100),
-      calories: this.runningExercise.calories * (progress / 100),
+      duration,
+      calories,
       date: new Date(),
       state: 'Cancelled',
-      userId: this.user.uid
+      authId: this.auth.uid
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
@@ -81,7 +83,7 @@ export class TrainingService {
   fetchCompletedOrCancelled() {
     return this.db
       .collection('finishedExercises', ref =>
-        ref.where('userId', '==', this.user.uid)
+        ref.where('authId', '==', this.auth.uid)
       )
       .snapshotChanges()
       .pipe(

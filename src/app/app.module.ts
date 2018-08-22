@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: '../app/training/training.module#TrainingModule',
     canLoad: [AuthGuard]
   },
+  {
+    path: 'profile',
+    loadChildren: '../app/profile/profile.module#ProfileModule',
+    canLoad: [AuthGuard]
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -11,16 +11,17 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.css']
+  styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit, OnDestroy {
-  @Output() sidenavClose = new EventEmitter();
+  @Output()
+  sidenavClose = new EventEmitter();
   isAuth: boolean;
   authChangeSubsciption: Subscription;
-  constructor(private auth: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {
-    this.auth.authChange.subscribe(status => {
+    this.authService.authChange.subscribe(status => {
       this.isAuth = status;
     });
   }
@@ -32,6 +33,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
   logout() {
     this.closeSideNav();
-    this.auth.logout();
+    this.authService.logout();
   }
 }
