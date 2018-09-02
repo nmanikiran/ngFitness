@@ -1,5 +1,119 @@
 <section class="profile-details">
   <mat-card>
-    Profile details coming soon ...
+    <form fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="5px"
+          [formGroup]="profileFrom"
+          (submit)="save()"
+          class="profile-form">
+      <div fxLayout="row"
+           fxLayoutAlign="center center">
+        <div class="profile-pic"
+             [style.background-image]="'url('+ profileUrl +')'">
+          <mat-progress-spinner class="example-margin"
+                                color="primary"
+                                mode="determinate"
+                                *ngIf="!(percentage === 100)"
+                                [value]="percentage">
+          </mat-progress-spinner>
+          <label for="file"
+                 class="file-input"
+                 mat-button
+                 color="primary"
+                 *ngIf="!profileUrl || !(percentage === 100)"> Upload
+            <input id="file"
+                   type="file"
+                   (change)="uploadFile($event)">
+          </label>
+        </div>
+      </div>
+      <br /><br/>
+      <div class="row"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="20px"
+           fxLayoutAlign="start space-between">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Enter First Name"
+                 type="text"
+                 name="firstName"
+                 formControlName="firstName"
+                 required>
+
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 placeholder="Enter Last Name"
+                 type="text"
+                 name="lastName"
+                 formControlName="lastName"
+                 required>
+
+        </mat-form-field>
+      </div>
+
+      <mat-radio-group fxLayout="row"
+                       fxLayoutGap="20px"
+                       formControlName="gender">
+        <mat-radio-button value="Male"
+                          color="primary"
+                          required>Male</mat-radio-button>
+        <mat-radio-button value="Female"
+                          color="primary"
+                          required>Female</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <input matInput
+               [max]="maxDate"
+               [matDatepicker]="picker"
+               placeholder="Your Birthday"
+               name="birthday"
+               formControlName="birthday"
+               required>
+        <mat-datepicker-toggle matSuffix
+                               [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput
+               placeholder="Your Email"
+               type="email"
+               name="email"
+               formControlName="email"
+               required
+               email>
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput
+               placeholder="Enter Address"
+               type="text"
+               name="address"
+               appGooglePlace
+               (placeSelect)="onSelect($event)"
+               formControlName="address"
+               required>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput
+                  placeholder="Enter your Bio"
+                  type="text"
+                  name="bio"
+                  rows="8"
+                  formControlName="bio"
+                  required></textarea>
+      </mat-form-field>
+      <div fxLayout="row"
+           fxLayoutGap="20px"
+           fxLayoutAlign="end end">
+        <button mat-raised-button>Cancel</button>
+        <button mat-raised-button
+                type="submit"
+                color="primary">Update</button>
+      </div>
+    </form>
   </mat-card>
 </section>

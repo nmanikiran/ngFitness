@@ -1,6 +1,56 @@
 .profile-details {
-  margin: 30px;
+  width: 65%;
+  margin: 30px auto;
+}
+.profile-form {
+  width: 60%;
+  margin: 0 auto;
+  .row {
+    width: 100%;
+  }
+  mat-form-field {
+    width: 100%;
+  }
 }
 .mat-icon {
   margin-right: 5px;
+}
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid #d4d4d4;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  .file-input {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  input[type='file'] {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .profile-details {
+    width: 80%;
+    margin: 5px auto;
+  }
+  .profile-form {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 760px) {
+  .profile-details {
+    width: calc(100% - 10px);
+    margin: 5px;
+  }
+  .profile-form {
+    width: 100%;
+  }
 }

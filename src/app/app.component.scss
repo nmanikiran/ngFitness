@@ -10,6 +10,16 @@ mat-sidenav {
 .mat-toolbar-single-row {
   height: 56px;
 }
+.main {
+  min-height: calc(100vh - 7em);
+  height: auto;
+}
 .m0 {
   margin: 0 !important;
+}
+footer {
+  margin: 10px 0;
+}
+.text-center {
+  text-align: center;
 }

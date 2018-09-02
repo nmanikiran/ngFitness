@@ -1,11 +1,22 @@
 <section class="singup-form">
   <mat-card>
 
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px" [formGroup]="registerForm" (submit)="singup()">
+    <form fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="5px"
+          [formGroup]="registerForm"
+          (submit)="singup()">
       <mat-form-field>
-        <input matInput placeholder="Your Email" type="email" name="email" formControlName="email" required email>
+        <input matInput
+               placeholder="Your Email"
+               type="email"
+               name="email"
+               formControlName="email"
+               required
+               email>
 
-        <div *ngIf="submitted && fControls['email'].errors" class="invalid-feedback">
+        <div *ngIf="submitted && fControls['email'].errors"
+             class="invalid-feedback">
           <mat-error *ngIf="fControls['email'].errors.required">Email is required</mat-error>
           <mat-error *ngIf="fControls['email'].errors.email">Email must be a valid email address</mat-error>
         </div>
@@ -13,33 +24,41 @@
       </mat-form-field>
 
       <mat-form-field hintLabel="Should be at least 6 charaters long">
-        <input matInput placeholder="Enter Password" type="password" name="password" formControlName="password" required minlength="6">
-        <mat-hint align="end" *ngIf="fControls['password'].value?.length < 6">
+        <input matInput
+               placeholder="Enter Password"
+               type="password"
+               name="password"
+               formControlName="password"
+               required
+               minlength="6">
+        <mat-hint align="end"
+                  *ngIf="fControls['password'].value?.length < 6">
           {{ fControls['password'].value?.length}} / 6
         </mat-hint>
 
-        <div *ngIf="submitted && fControls['password'].errors" class="invalid-feedback">
+        <div *ngIf="submitted && fControls['password'].errors"
+             class="invalid-feedback">
           <mat-error *ngIf="fControls['password'].errors.required">Password is required</mat-error>
           <mat-error *ngIf="fControls['password'].errors.minlength">
             Password must be at least 6 characters</mat-error>
         </div>
 
       </mat-form-field>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Your Birthday" name="birthday" formControlName="birthday" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-checkbox color="primary" formControlName="isAgreed">
+
+      <mat-checkbox color="primary"
+                    formControlName="isAgreed">
         Agree the terms and conditions</mat-checkbox>
 
       <mat-error *ngIf="submitted && fControls['isAgreed']?.errors?.required">
         You must accept the Terms & Conditions
       </mat-error>
-      <button type="submit" color="primary" mat-raised-button>Signup</button>
+      <button type="submit"
+              color="primary"
+              mat-raised-button>Signup</button>
       <br>
-      <div fxLayout="row" fxLayoutAlign="center center">
-        Already have an account? <a routerLink="/auth/signin">Sign in</a></div>
+      <div fxLayout="row"
+           fxLayoutAlign="center center">
+        Already have an account? <a routerLink="/auth/signin"> Sign in</a></div>
     </form>
   </mat-card>
 </section>

@@ -1,12 +1,18 @@
 <mat-toolbar color="primary">
   <div>
-    <button mat-icon-button (click)="onToggleSideNav()">
+    <button mat-icon-button
+            (click)="onToggleSideNav()">
       <mat-icon> menu</mat-icon>
     </button>
     <a routerLink="/">Ng Fitness </a>
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-    <ul fxLayout fxLayoutGap="10px" class="nav-items">
+  <div fxFlex
+       fxLayout
+       fxLayoutAlign="flex-end"
+       fxHide.xs>
+    <ul fxLayout
+        fxLayoutGap="10px"
+        class="nav-items">
       <li *ngIf="!isAuth">
         <a routerLink="/auth/signin">Singin</a>
       </li>
@@ -15,17 +21,29 @@
       </li>
     </ul>
 
-    <button mat-icon-button *ngIf="isAuth" [matMenuTriggerFor]="colorPicker" role="button">
+    <button mat-icon-button
+            *ngIf="isAuth"
+            [matMenuTriggerFor]="colorPicker"
+            role="button">
       <mat-icon>format_color_fill</mat-icon>
     </button>
-    <mat-menu #colorPicker="matMenu" role="menu">
-      <div class="color" *ngFor="let tile of colors" (click)="changeTheme(tile.color)">
-        <div class="circle" [style.background]="tile.color"></div>
+    <mat-menu #colorPicker="matMenu"
+              role="menu">
+      <div class="color"
+           *ngFor="let tile of colors"
+           (click)="changeTheme(tile.color)">
+        <div class="circle"
+             [style.background]="tile.color"></div>
       </div>
     </mat-menu>
 
-    <a *ngIf="isAuth" mat-button href="https://github.com/nmanikiran/ngFitness" target="_blank">
-      <img height="26" src="./../../../assets/github-circle-white-transparent.svg" alt="github"> Github
+    <a *ngIf="isAuth"
+       mat-button
+       href="https://github.com/nmanikiran/ngFitness"
+       target="_blank">
+      <img height="26"
+           src="./../../../assets/github-circle-white-transparent.svg"
+           alt="github"> Github
     </a>
 
 

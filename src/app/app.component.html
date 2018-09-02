@@ -5,8 +5,15 @@
 
   <mat-sidenav-content>
     <app-header (sidenavToggle)="sidenav.toggle()" (changeColor)="changeTheme($event)"></app-header>
-    <router-outlet>
+    <section class="main">
+      <router-outlet>
 
-    </router-outlet>
+      </router-outlet>
+    </section>
+    <footer class="text-center">
+      <p> Made with &#10084; by
+        <a class="" href="https://github.com/nmanikiran">Mani Kiran</a>
+      </p>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
