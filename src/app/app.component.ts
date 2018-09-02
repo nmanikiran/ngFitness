@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.auth.initAuthListener();
   }
-  changeTheme(e) {
+  changeTheme(e: string) {
     this.themeName = e;
   }
 }

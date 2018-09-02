@@ -48,10 +48,13 @@
       <mat-checkbox color="primary"
                     formControlName="isAgreed">
         Agree the terms and conditions</mat-checkbox>
+      <div *ngIf="submitted && fControls['isAgreed'].errors"
+           class="invalid-feedback">
+        <mat-error *ngIf="fControls['isAgreed'].errors.required">
+          You must accept the Terms & Conditions
+        </mat-error>
+      </div>
 
-      <mat-error *ngIf="submitted && fControls['isAgreed']?.errors?.required">
-        You must accept the Terms & Conditions
-      </mat-error>
       <button type="submit"
               color="primary"
               mat-raised-button>Signup</button>

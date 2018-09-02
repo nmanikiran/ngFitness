@@ -9,7 +9,7 @@ import { TrainingService } from '../training.service';
 })
 export class CurrentComponent implements OnInit {
   progress = 0;
-  timer;
+  timer: any;
   isInProgress = false;
   constructor(
     public snackBar: MatSnackBar,

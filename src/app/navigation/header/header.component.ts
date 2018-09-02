@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
-import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -25,11 +24,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   colors = [{ color: 'purple' }, { color: 'pink' }];
   constructor(private auth: AuthService) {}
 
-  changeTheme(color) {
+  changeTheme(color: string) {
     this.changeColor.emit(color);
   }
   ngOnInit() {
-    this.auth.authChange.subscribe(status => {
+    this.authChangeSubsciption = this.auth.authChange.subscribe(status => {
       this.isAuth = status;
     });
   }

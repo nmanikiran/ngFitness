@@ -33,7 +33,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
       error => {
         this.snackbar.open(
           'Fectching exercises failed, please try again later',
-          null,
+          undefined,
           { duration: 3000 }
         );
       }

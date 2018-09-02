@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       return true;
     } else {
       this.router.navigate(['/auth/signin']);
+      return false;
     }
   }
 
@@ -26,6 +27,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       return true;
     } else {
       this.router.navigate(['/auth/signin']);
+      return false;
     }
   }
 }

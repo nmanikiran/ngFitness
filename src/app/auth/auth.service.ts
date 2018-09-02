@@ -10,7 +10,7 @@ import { SharedService } from '../shared/shared.service';
 export class AuthService {
   private isAuthenticated = false;
   public authChange = new Subject<boolean>();
-  public auth;
+  public auth: any;
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -43,7 +43,7 @@ export class AuthService {
       )
       .then(result => {})
       .catch(error => {
-        this.snackBar.open(error.message, null, { duration: 3000 });
+        this.snackBar.open(error.message, undefined, { duration: 3000 });
       });
   }
 
@@ -52,7 +52,7 @@ export class AuthService {
       .signInWithEmailAndPassword(auth.email, auth.password)
       .then(result => {})
       .catch(error => {
-        this.snackBar.open(error.message, null, { duration: 3000 });
+        this.snackBar.open(error.message, undefined, { duration: 3000 });
       });
   }
 
@@ -62,7 +62,7 @@ export class AuthService {
       .then(() =>
         this.snackBar.open(
           'Password Reset link sent to your registred mail',
-          null,
+          undefined,
           { duration: 3000 }
         )
       )

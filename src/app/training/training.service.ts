@@ -10,7 +10,7 @@ export class TrainingService {
   exerciseChanged = new Subject<Exercise>();
   exercisesChanged = new Subject<Exercise[]>();
   private availableExercises: Exercise[] = [];
-  private runningExercise: Exercise;
+  private runningExercise: any;
   private auth: any;
 
   constructor(private db: AngularFirestore, private afAuth: AngularFireAuth) {
@@ -26,20 +26,17 @@ export class TrainingService {
       .pipe(
         map(docArray => {
           return docArray.map(doc => {
-            return {
+            return <Exercise>{
               id: doc.payload.doc.id,
               ...doc.payload.doc.data()
             };
           });
         })
       )
-      .subscribe(
-        (results: Exercise[]) => {
-          this.availableExercises = results;
-          this.exercisesChanged.next([...this.availableExercises]);
-        },
-        error => {}
-      );
+      .subscribe((results: Exercise[]) => {
+        this.availableExercises = results;
+        this.exercisesChanged.next([...this.availableExercises]);
+      });
   }
 
   startExercise(selectedId: string) {
@@ -57,7 +54,7 @@ export class TrainingService {
       authId: this.auth.uid
     });
     this.runningExercise = null;
-    this.exerciseChanged.next(null);
+    this.exerciseChanged.next(undefined);
   }
 
   cancelExercise(progress: number) {
@@ -73,7 +70,7 @@ export class TrainingService {
       authId: this.auth.uid
     });
     this.runningExercise = null;
-    this.exerciseChanged.next(null);
+    this.exerciseChanged.next(undefined);
   }
 
   getRunningExercise() {
@@ -89,7 +86,10 @@ export class TrainingService {
       .pipe(
         map(docArray => {
           return docArray.map(doc => {
-            return { id: doc.payload.doc.id, ...doc.payload.doc.data() };
+            return <Exercise>{
+              id: doc.payload.doc.id,
+              ...doc.payload.doc.data()
+            };
           });
         })
       );

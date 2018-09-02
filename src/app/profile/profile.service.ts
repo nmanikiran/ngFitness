@@ -14,7 +14,7 @@ export class ProfileService {
     });
   }
 
-  getProfile(id): Observable<Profile[]> {
+  getProfile(id: string): Observable<Profile[]> {
     return this.db
       .collection('profile', ref => ref.where('authId', '==', id))
       .snapshotChanges()
@@ -29,10 +29,10 @@ export class ProfileService {
         })
       );
   }
-  updateProfile(id, profile) {
+  updateProfile(id: string, profile: Profile) {
     this.db.doc(`profile/${id}`).update(profile);
   }
-  addProfile(profile) {
+  addProfile(profile: Profile) {
     this.db.collection('profile').add(profile);
   }
 }

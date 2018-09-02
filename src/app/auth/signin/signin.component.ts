@@ -10,7 +10,7 @@ import { SharedService } from '../../shared/shared.service';
 })
 export class SigninComponent implements OnInit {
   loginForm: FormGroup;
-  submitted;
+  submitted: boolean;
   constructor(
     private auth: AuthService,
     private snackBar: MatSnackBar,
@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
     if (isValidEmail) {
       this.auth.forogotPassword(this.loginForm.value.email);
     } else {
-      this.snackBar.open('Enter email address', null, { duration: 3000 });
+      this.snackBar.open('Enter email address', undefined, { duration: 3000 });
     }
   }
 }

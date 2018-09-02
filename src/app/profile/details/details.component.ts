@@ -12,12 +12,12 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
-  auth;
+  auth: any;
   profileFrom: FormGroup;
   profile: any;
   maxDate: Date;
   selectedAddress = {};
-  percentage = 0;
+  percentage: number | undefined;
   profileUrl: any;
   constructor(
     private profileService: ProfileService,
@@ -80,15 +80,15 @@ export class DetailsComponent implements OnInit {
       this.profileService.addProfile(updatedProfile);
     }
   }
-  onSelect(address) {
+  onSelect(address: any) {
     this.selectedAddress = address;
   }
-  uploadFile(event) {
+  uploadFile(event: any) {
     const file = event.target.files[0];
     const filePath = `/profilepics/${new Date().getTime()}_${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-    task.percentageChanges().subscribe((res: number) => {
+    task.percentageChanges().subscribe((res: number | undefined) => {
       this.percentage = res;
     });
 

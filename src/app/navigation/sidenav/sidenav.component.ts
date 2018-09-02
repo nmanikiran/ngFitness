@@ -21,9 +21,11 @@ export class SidenavComponent implements OnInit, OnDestroy {
   constructor(public authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.authChange.subscribe(status => {
-      this.isAuth = status;
-    });
+    this.authChangeSubsciption = this.authService.authChange.subscribe(
+      status => {
+        this.isAuth = status;
+      }
+    );
   }
   closeSideNav() {
     this.sidenavClose.emit();

@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
+import { Address } from './profile/models/profile';
 declare var google: any;
 @Directive({
   selector: '[appGooglePlace]'
@@ -29,8 +30,19 @@ export class GooglePlaceDirective implements OnInit, AfterViewInit, OnDestroy {
     this.element = elRef.nativeElement;
   }
 
-  getFormattedAddress(place) {
-    const location_obj = {};
+  getFormattedAddress(place: any) {
+    const location_obj: Address = {
+      formatted_address: '',
+      locality: '',
+      admin_area_l1: '',
+      street_number: '',
+      route: '',
+      country: '',
+      postal_code: ''
+    };
+    if (!place) {
+      return location_obj;
+    }
     // tslint:disable-next-line:forin
     for (const i in place.address_components) {
       const item = place.address_components[i];
@@ -69,11 +81,15 @@ export class GooglePlaceDirective implements OnInit, AfterViewInit, OnDestroy {
           this.getFormattedAddress(autocomplete.getPlace())
         );
       });
-      google.maps.event.addDomListener(this.element, 'keydown', e => {
-        if (e.keyCode === 13) {
-          e.preventDefault();
+      google.maps.event.addDomListener(
+        this.element,
+        'keydown',
+        (e: KeyboardEvent) => {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+          }
         }
-      });
+      );
     }, 3000);
   }
   ngOnDestroy() {
