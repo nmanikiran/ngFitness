@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { environment } from './../environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const routes: Routes = [
   { path: 'home', component: WelcomeComponent },
@@ -48,6 +49,9 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production
+    }),
 
     RouterModule.forRoot(routes)
   ],
