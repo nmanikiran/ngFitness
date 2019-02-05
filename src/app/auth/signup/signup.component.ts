@@ -10,9 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private auth: AuthService) {}
-
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder, private auth: AuthService) {
     this.registerForm = this.formBuilder.group({
       isAgreed: [null, Validators.required],
       birthday: ['', Validators.required],
@@ -20,6 +18,8 @@ export class SignupComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
+
+  ngOnInit() {}
 
   get fControls() {
     return this.registerForm.controls;

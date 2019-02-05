@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class TrainingComponent implements OnInit, OnDestroy {
   isOnGoingTraining = false;
-  exerciseSubscription: Subscription;
+  exerciseSubscription: Subscription = new Subscription();
   constructor(
     private trainingService: TrainingService,
     private snackbar: MatSnackBar

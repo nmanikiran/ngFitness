@@ -10,14 +10,12 @@ import { SharedService } from '../../shared/shared.service';
 })
 export class SigninComponent implements OnInit {
   loginForm: FormGroup;
-  submitted: boolean;
+  submitted = false;
   constructor(
     private auth: AuthService,
     private snackBar: MatSnackBar,
     private sharedService: SharedService
-  ) {}
-
-  ngOnInit() {
+  ) {
     const emailAddress = this.sharedService.getCookie('email') || '';
     this.loginForm = new FormGroup({
       email: new FormControl(emailAddress, {
@@ -29,6 +27,8 @@ export class SigninComponent implements OnInit {
       remember: new FormControl(false, {})
     });
   }
+
+  ngOnInit() {}
 
   get fControls() {
     return this.loginForm.controls;

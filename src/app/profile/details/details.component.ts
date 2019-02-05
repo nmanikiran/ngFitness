@@ -15,7 +15,7 @@ export class DetailsComponent implements OnInit {
   auth: any;
   profileFrom: FormGroup;
   profile: any;
-  maxDate: Date;
+  maxDate: Date = new Date();
   selectedAddress = {};
   percentage: number | undefined;
   profileUrl: any;
@@ -27,11 +27,21 @@ export class DetailsComponent implements OnInit {
     private storage: AngularFireStorage
   ) {
     this.auth = this.authService.auth;
+    this.profileFrom = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      gender: ['', Validators.required],
+      birthday: ['', Validators.required],
+      email: [
+        { value: this.auth.email, disabled: true },
+        [Validators.required, Validators.email]
+      ],
+      address: ['', Validators.required],
+      bio: ['', [Validators.required, Validators.minLength(20)]]
+    });
   }
 
   ngOnInit() {
-    this.maxDate = new Date();
-
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
     const routeParams = this.activeRoute.snapshot.params;
 
@@ -52,19 +62,6 @@ export class DetailsComponent implements OnInit {
           bio: result[0].bio
         });
       }
-    });
-
-    this.profileFrom = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      gender: ['', Validators.required],
-      birthday: ['', Validators.required],
-      email: [
-        { value: this.auth.email, disabled: true },
-        [Validators.required, Validators.email]
-      ],
-      address: ['', Validators.required],
-      bio: ['', [Validators.required, Validators.minLength(20)]]
     });
   }
   save() {

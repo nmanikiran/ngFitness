@@ -16,8 +16,8 @@ import { Subscription } from 'rxjs';
 export class SidenavComponent implements OnInit, OnDestroy {
   @Output()
   sidenavClose = new EventEmitter();
-  isAuth: boolean;
-  authChangeSubsciption: Subscription;
+  isAuth = false;
+  authChangeSubsciption: Subscription = new Subscription();
   constructor(public authService: AuthService) {}
 
   ngOnInit() {

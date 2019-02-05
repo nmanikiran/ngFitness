@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Output()
   changeColor = new EventEmitter();
   isAuth = false;
-  authChangeSubsciption: Subscription;
+  authChangeSubsciption: Subscription = new Subscription();
 
   colors = [{ color: 'purple' }, { color: 'pink' }];
   constructor(private auth: AuthService) {}

@@ -18,11 +18,11 @@ import { Subscription } from '../../../../node_modules/rxjs';
 export class PastComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns = ['date', 'name', 'duration', 'calories', 'state'];
   dataSource = new MatTableDataSource<Exercise>();
-  pastExercisesSubscription: Subscription;
+  pastExercisesSubscription: Subscription = new Subscription();
   @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+  paginator!: MatPaginator;
   @ViewChild(MatSort)
-  sort: MatSort;
+  sort: MatSort = new MatSort();
 
   constructor(private trainingService: TrainingService) {}
 
